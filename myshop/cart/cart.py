@@ -30,7 +30,7 @@ class Cart:
             yield item
 
     def __len__(self):
-        '''Returns all items in the cart'''
+        """Returns all items in the cart"""
         return sum(i['quantity'] for i in self.cart.values())
 
     def add(self, product, quantity=1, override_quantity=False):
