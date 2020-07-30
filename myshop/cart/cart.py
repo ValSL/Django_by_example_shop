@@ -52,7 +52,7 @@ class Cart:
         self.session.modified = True  # This tells Django that the session has changed and needs to be saved.
 
     def remove(self, product):
-        product_id = product.id
+        product_id = str(product.id)
         if product_id in self.cart:
             del self.cart[product_id]
             self.save()
