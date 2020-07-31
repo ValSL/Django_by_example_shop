@@ -131,3 +131,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 CART_SESSION_ID = 'cart'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'ValSLTest@yandex.by'
+EMAIL_HOST_PASSWORD = 'etereg14'
+EMAIL_USE_SSL = True
