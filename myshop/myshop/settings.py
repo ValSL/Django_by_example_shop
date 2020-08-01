@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import braintree
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -26,7 +26,6 @@ SECRET_KEY = 'buw_96w@o%*$7x!##7w1a16j1cc593evu&s1#oj-@zzo4vqv@9'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myshop.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -87,7 +86,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -107,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -120,7 +117,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -137,3 +133,15 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'ValSLTest@yandex.by'
 EMAIL_HOST_PASSWORD = 'etereg14'
 EMAIL_USE_SSL = True
+
+# Braintree settings
+BRAINTREE_MERCHANT_ID = os.getenv('BRAINTREE_MERCHANT_ID')  # Merchant ID
+BRAINTREE_PUBLIC_KEY = os.getenv('BRAINTREE_PUBLIC_KEY')  # Public Key
+BRAINTREE_PRIVATE_KEY = os.getenv('BRAINTREE_PRIVATE_KEY')  # Private key
+
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
