@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from cart.cart import Cart
-from .models import OrderItem
+from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from .tasks import order_created
 from django.urls import reverse
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 def order_create(request):
@@ -22,7 +23,12 @@ def order_create(request):
             order_created.delay(order.id)
             request.session['order_id'] = order.id
             return redirect(reverse('payment:process'))
-            return render(request, 'orders/order/created.html', {'order': order})
     else:
         form = OrderCreateForm()
     return render(request, 'orders/order/create.html', {'form': form, 'cart': cart})
+
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'admin/orders/order/detail.html', {'order': order})
