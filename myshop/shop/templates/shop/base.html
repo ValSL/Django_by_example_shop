@@ -1,32 +1,39 @@
+{% load i18n %}
 {% load static %}
 
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}My shop{% endblock %}</title>
+    <title>{% block title %}{% trans "My shop" %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
-    <div id="header">
-        <a href="/" class="logo">My shop</a>
+<div id="header">
+    <a href="/" class="logo">{% trans "My shop" %}</a>
+</div>
+<div id="subheader">
+    <div class="cart">
+        {% with cart|length as total_items %}
+            {% if total_items > 0 %}
+                {% trans "Your cart" %}
+                <a href="{% url 'cart:cart_detail' %}">
+                    {% blocktrans with total=cart.get_total_price count items=total_items %} {# count(относится к items) нужен для plural для вывода правильных окончаний для множ. числа #}
+                        {{ items }} item, ${{ total }}
+                    {% plural %}
+                        {{ items }} items, ${{ total }}
+                    {% endblocktrans %}
+                </a>
+            {% else %}
+                {% trans "Your cart is empty." %}
+            {% endif %}
+        {% endwith %}
     </div>
-    <div id="subheader">
-        <div class="cart">
-            {% with cart|length as total_items %}
-                {% if total_items > 0 %}
-                    <a href="{% url 'cart:cart_detail' %}">{{ total_items }} item{{ total_items|pluralize }},
-                     ${{ cart.get_total_price }}</a>
-                {% else %}
-                    Your cart is empty.
-                {% endif %}
-            {% endwith %}
-        </div>
-    </div>
-    <div id="content">
-        {% block content %}
+</div>
+<div id="content">
+    {% block content %}
 
-        {% endblock %}
-    </div>
+    {% endblock %}
+</div>
 </body>
 </html>
