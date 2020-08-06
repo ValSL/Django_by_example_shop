@@ -20,27 +20,27 @@ msgstr ""
 
 #: orders/models.py:10
 msgid "first name"
-msgstr "nombre"
+msgstr ""
 
 #: orders/models.py:11
 msgid "last name"
-msgstr "apellidos"
+msgstr ""
 
 #: orders/models.py:12
 msgid "email"
-msgstr "e-mail"
+msgstr ""
 
 #: orders/models.py:13
 msgid "address"
-msgstr "dirección"
+msgstr ""
 
 #: orders/models.py:14
 msgid "postal code"
-msgstr "código postal"
+msgstr ""
 
 #: orders/models.py:15
 msgid "city"
-msgstr "ciudad"
+msgstr ""
 
 #: orders/templates/orders/order/create.html:4
 #: orders/templates/orders/order/create.html:8
