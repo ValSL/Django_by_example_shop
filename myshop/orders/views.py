@@ -50,4 +50,4 @@ def admin_order_pdf(request, order_id):
     response['Content-Disposition'] = f'filename=order_{order_id}.pdf'
     weasyprint.HTML(string=html).write_pdf(response,  # PDF файл записывается в response
                                            stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + 'css/pdf.css')])
-    return responses
+    return response
