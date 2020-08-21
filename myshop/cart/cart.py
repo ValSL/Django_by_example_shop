@@ -1,7 +1,9 @@
 from decimal import Decimal
+
 from django.conf import settings
-from shop.models import Product
+
 from coupon.models import Coupon
+from shop.models import Product
 
 
 class Cart:
@@ -52,7 +54,8 @@ class Cart:
 
     def save(self):
         # mark the session as "modified" to make sure it gets saved
-        self.session.modified = True  # This tells Django that the session has changed and needs to be saved.
+        # This tells Django that the session has changed and needs to be saved.
+        self.session.modified = True
 
     def remove(self, product):
         product_id = str(product.id)

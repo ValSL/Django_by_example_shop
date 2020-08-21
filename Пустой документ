@@ -1,0 +1,6 @@
+from django.contrib.auth.models import User
+from courses.models import Subject, Course, Module
+user = User.objects.last()
+subject = Subject.objects.last()
+c1 = Course.objects.get(id=2)
+
